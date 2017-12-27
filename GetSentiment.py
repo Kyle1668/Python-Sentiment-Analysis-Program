@@ -7,32 +7,54 @@ from textblob.sentiments import NaiveBayesAnalyzer
 
 def print_prompt():
     print("\n------------------------------------------")
-    print("Enter text to be analyzed")
+    print(" Sentiment Analysis Program")
     print("------------------------------------------\n")
 
 
 def get_input():
-    user_input = input()
+    user_input = input("Enter text to be analyzed: ")
     formatted_words = []
     return_text = ""
 
     porter_algorithm = PorterStemmer()
     stop_words = set(stopwords.words("English"))
 
+    # Tokenize the text by word and remove punctuation.
+    words = word_tokenize(user_input)
+    tokenized_words = [word.lower() for word in words if word.isalpha()]
+
     if len(user_input) != 0:
-        for in_word in word_tokenize(user_input):
+        for in_word in tokenized_words:
             if in_word not in stop_words:
                 stemmed_word = porter_algorithm.stem(in_word)
                 formatted_words.append(stemmed_word)
 
     for word in formatted_words:
-        return_text += (" " + word)
+        return_text += (word + " ")
 
-    return formatted_words
+    return return_text
+
+
+def get_sentiment(argued_text):
+    formatted_argued_text = TextBlob(argued_text, analyzer=NaiveBayesAnalyzer())
+    return formatted_argued_text.sentiment
+
+
+def print_sentiment_data(sentiment_data):
+    if sentiment_data is not None:
+        if sentiment_data.classification is "pos":
+            print("Classification: Positive")
+        else:
+            print("Classification: Negative")
+
+        print("P_Pos: " + str(sentiment_data.p_pos))
+        print("P_Neg: " + str(sentiment_data.p_neg))
 
 
 def main():
-    testimonial = TextBlob("I hate this movie!", analyzer=NaiveBayesAnalyzer())
+    entered_text = get_input()
+    sentiment_data = get_sentiment(entered_text)
+    print_sentiment_data(sentiment_data)
 
 
-
+main()
