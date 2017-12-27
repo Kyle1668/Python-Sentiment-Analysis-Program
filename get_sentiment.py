@@ -48,7 +48,7 @@ def print_sentiment_data(sentiment_data):
             print("\nClassification: Negative")
 
         print("P_Pos: " + str(sentiment_data.p_pos))
-        print("P_Neg: " + str(sentiment_data.p_neg))
+        print("P_Neg: " + str(sentiment_data.p_neg) + "\n")
 
 
 def main():
