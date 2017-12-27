@@ -7,7 +7,7 @@ from textblob.sentiments import NaiveBayesAnalyzer
 
 def print_prompt():
     print("\n------------------------------------------")
-    print(" Sentiment Analysis Program")
+    print("       Sentiment Analysis Program")
     print("------------------------------------------\n")
 
 
@@ -43,15 +43,16 @@ def get_sentiment(argued_text):
 def print_sentiment_data(sentiment_data):
     if sentiment_data is not None:
         if sentiment_data.classification is "pos":
-            print("Classification: Positive")
+            print("\nClassification: Positive")
         else:
-            print("Classification: Negative")
+            print("\nClassification: Negative")
 
         print("P_Pos: " + str(sentiment_data.p_pos))
         print("P_Neg: " + str(sentiment_data.p_neg))
 
 
 def main():
+    print_prompt()
     entered_text = get_input()
     sentiment_data = get_sentiment(entered_text)
     print_sentiment_data(sentiment_data)
