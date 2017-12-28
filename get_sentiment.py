@@ -42,7 +42,9 @@ def get_sentiment(argued_text):
 
 def print_sentiment_data(sentiment_data):
     if sentiment_data is not None:
-        if sentiment_data.classification is "pos":
+        if abs(sentiment_data.p_pos - sentiment_data.p_neg) <= .25:
+            print("\nClassification: Neutral")
+        elif sentiment_data.classification is "pos":
             print("\nClassification: Positive")
         else:
             print("\nClassification: Negative")
